@@ -54,6 +54,18 @@ function shuffle(array) {
     return array;
 }
 
+function createCard(cardClass) { 
+    let li = document.createElement('li'); 
+    li.classList.add('card'); 
+    li.classList.add('card-' + cardClass); 
+    li.setAttribute('dataCard', cardClass); 
+    let i = document.createElement('i'); 
+    i.classList.add('cardIcon', 'fa', cardClass); 
+    i.setAttribute('dataCard', cardClass); 
+    li.appendChild(i); 
+    return li; 
+} 
+
 deck.addEventListener('click', event  => { 
     const clickTarget = event.target;
     displayTime();
