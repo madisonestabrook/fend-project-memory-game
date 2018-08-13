@@ -57,6 +57,7 @@ function shuffle(array) {
 deck.addEventListener('click', event  => { 
     const clickTarget = event.target;
     displayTime();
+    addMove();
     if (clickTarget.classList.contains("card")) { 
         clickTarget.classList.toggle('open'); 
         clickTarget.classList.toggle('show'); 
