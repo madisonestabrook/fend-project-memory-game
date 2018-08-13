@@ -40,7 +40,6 @@ let time = 0;
 let clockId;
 let matched = 0
 
-
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
 
@@ -56,7 +55,8 @@ function shuffle(array) {
 }
 
 deck.addEventListener('click', event  => { 
-    const clickTarget = event.target; 
+    const clickTarget = event.target;
+    displayTime();
     if (clickTarget.classList.contains("card")) { 
         clickTarget.classList.toggle('open'); 
         clickTarget.classList.toggle('show'); 
@@ -66,6 +66,7 @@ deck.addEventListener('click', event  => {
         addMove();
         checkScore();
         startClock();
+        displayTime();
     }
 });
  
@@ -100,10 +101,11 @@ function checkScore() {
 
 function startClock() {
     time++;  
-    let clockId = setInterval({ }, 10); 
+    let clockId = setInterval({ }, 1000); 
 }
 
 function displayTime(){ 
+    let clockId = setInterval({ }, 1000);     
     const clock = document.querySelector('.clock'); 
     const minutes = Math.floor(clockId / 60); 
     const seconds = clockId % 60; 
@@ -124,7 +126,7 @@ function toggleModal() {
     modal.classList.toggle('hide'); 
 }
 
-function writeModalStats() { 
+function writeModalStats() {
     const timeStat = document.querySelector('.modal_time'); 
     const clockTime = document.querySelector('.clock'); 
     const movesStat = document.querySelector('.modal_moves'); 
@@ -158,7 +160,7 @@ function resetClockAndTime() {
     stopClock(); 
     clockOff = true; 
     time = 0; 
-    displayTime()
+    displayTime();
 }
 
 function resetMoves() { 
