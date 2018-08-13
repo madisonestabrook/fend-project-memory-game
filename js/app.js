@@ -58,6 +58,7 @@ deck.addEventListener('click', event  => {
     const clickTarget = event.target;
     displayTime();
     addMove();
+    checkScore();
     if (clickTarget.classList.contains("card")) { 
         clickTarget.classList.toggle('open'); 
         clickTarget.classList.toggle('show'); 
@@ -94,9 +95,17 @@ function hideStar() {
     } 
 }
 
+function resetStars() { 
+    stars = 0; 
+    const starList = document.querySelectorAll('.star'); 
+    for(star of starList) { 
+        star.style.display = 'inline';
+    }
+}
+
 function checkScore() { 
     if(moves === 19 || moves === 22) { 
-        removeStar(); 
+        resetStar(); 
     }
 }
 
@@ -169,13 +178,7 @@ function resetMoves() {
     document.querySelector('.moves').innerHTML = moves; 
 }
 
-function resetStars() { 
-    stars = 0; 
-    const starList = document.querySelectorAll('.star'); 
-    for(star of starList) { 
-        star.style.display = 'inline';
-    }
-}
+
 
 function checkForMatch() { 
     if (toggledCards[0].firstElementChild.className === toggledCards[1].firstElementChild.className) { 
