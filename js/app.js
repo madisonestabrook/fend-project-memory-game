@@ -60,7 +60,6 @@ let interval;
 
 let moves = 0;
 let allCards = deck.querySelectorAll('li');
-let openCards = [];
 let matched = 0;
 let cardHTML = [];
 
@@ -155,44 +154,35 @@ document.onload = startMemoryGame();
 
 function moveHandler() {
     deck.addEventListener("click", function(event) {
-        allCards.forEach(function(card, event) {
+//allCards.forEach(function(card, event) {
             card = event.target;
-            let openCards =+ event.target;
-            if (card.classList.contains('open') || card.classList.contains('show') && openCards.length < 2) {
-                console.log("Add an open card");
-                openCards.push(card);
-                console.log("Open card length: ", openCards.length);
+    deck.addEventListener("click", function(event) {
+            let card2  = event.target;
+           //if (card.classList.contains('open') || card.classList.contains('show') && openCards.length < 2) {
+                //console.log("Add an open card");
+                //openCards.push(card);
                 card.classList.add('open', 'show');
-
-                if (openCards.length == 2) {
+                card2.classList.add('open','show');
                     addMove();
-
-                    if (openCards[0].dataSet == openCards[1].dataSet) {
+                    if(card.classList.contains(cardClassesList) == card2.classList.contains(cardClassesList)){
+                    //if (openCards[0].dataSet.card == openCards[1].dataSet.card) {
                         console.log("This is a match!");
-                        openCards[0].classList.add('match');
-                        openCards[1].classList.add('match');
-
-                        openCards = [];
-
                         matched++;
-
+                    }
                         if (matched === 8) {
                             userWins();
                         }
                         else {
-                            setTimeout(function() {
-                                openCards.forEach(function(card) {
-                                    card.classList.remove('open', 'show');
-                                });
-                                openCards = [];
-                            }, 1000);
+                            setInterval(function(){
+                                   card.classList.remove('open', 'show');
+                                   card2.classList.remove('open', 'show'); 
+                            }, 10000);
                         }
-                    }
-                }
-            }
+//} 
         });
     });
 }
+   // });
 
 function startMemoryGame() {
 
@@ -205,13 +195,20 @@ function startMemoryGame() {
     addMove();
     startTimer();
     cardChecker();
+    checkScore(); 
 }
 
     //allCards.forEach(moveHandler);
 
     function checkScore() {
-        if (moves === 19 || moves === 22) {
+        if (moves > matched) {
             removeStar();
+        }
+        if(matched === moves) { 
+            stars = 3; 
+        }
+        if(matched > moves){ 
+            console.log("How is the number of matched card greater than the number of moves?")
         }
     }
 
@@ -230,7 +227,6 @@ function startMemoryGame() {
 
     function closeModal() {
         modal.classList.add('hide');
-        startMemoryGame();
     }
 
     function playAgain() {
@@ -252,9 +248,9 @@ document.querySelector('.fa-repeat').addEventListener("click", playAgain);
         modal.classList.add('show');
         let starRating = document.querySelector('.stars').innerHTML;
 
-        document.getElementById('modal_moves').innerHTML = moves;
-        document.getElementById('modal_stars').innerHTML = starRating;
-        document.getElementById('modal_time').innerHTML = finalTime;
+        let moves=  document.getElementById('modal_moves').innerHTML;
+        starRating = document.getElementById('modal_stars').innerHTML;
+        finalTime = document.getElementById('modal_time').innerHTML;
 
         closeModal();
     }
