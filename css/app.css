@@ -33,6 +33,11 @@ h1 {
     font-weight: 300;
 }
 
+footer { 
+    align-items: center; 
+    text-align: center;
+    justify-content: center;
+}
 /*
  * Styles for the deck of cards
  */
