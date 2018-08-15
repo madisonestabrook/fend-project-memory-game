@@ -19,8 +19,8 @@ let cardClassesList = [
 ];
 
 let deck = document.querySelector('.deck');
-let card = document.querySelectorAll(".card");
-let card2 = document.querySelectorAll(".card"); 
+let card2 = document.querySelector(".deck");
+let card = document.querySelector(".deck"); 
 
 
 // From Ryan 
@@ -138,7 +138,7 @@ function startTimer() {
 
 deck.innerHTML = cardHTML.join('');
 allCards = document.querySelectorAll('.card');
-allCards.forEach(moveHandler); 
+allCards.forEach(selectCards); 
 
 for (stars of starList) {
     {
@@ -154,36 +154,54 @@ clearInterval(interval);
 
 document.onload = startMemoryGame();
 
-
-function moveHandler() {
-    deck.addEventListener("click", function(event) {
-            card = event.target;
-    deck.addEventListener("click", function(event) {
-            card2  = event.target;
-
-         card2 = event.target; 
-                        card.classList.add('open', 'show');
-                        card2.classList.add('open','show');
-                            addMove();
-                            openCards.push(card);  
-                            openCards.push(card2);
-
-                    if(card.classList === card2.classList){
-                    setInterval(function(){
-                            card.classList.remove('open', 'show');
-                            card2.classList.remove('open', 'show'); 
-                     }, 1111);
-                    }
-                    else{
-                        console.log("This is a match!");
-                        matched = matched + 1;
-                        } 
-                        if (matched === 16) {
-                            userWins();
-                        }
-
-        });
+function selectFirstCard() { 
+    deck.addEventListener("click", function(event) { 
+        card = event.target;
+        card.classList.add('open', 'show');
+        openCards.push(card); 
+        return card; 
     }); 
+    deck.removeEventListener("click", function(event) { 
+        card = event.target;
+        card.classList.add('open', 'show');
+        openCards.push(card); 
+        return card; 
+    });  
+}
+function selectSecondCard() {
+    deck.addEventListener("click", function(event) { 
+        card2 = event.target;
+        card2.classList.add('open','show');
+        openCards.push(card2);
+        return card2; 
+    });
+    deck.removeEventListener("click", function(event) { 
+        card2 = event.target;
+        card2.classList.add('open','show');
+        openCards.push(card2);
+        return card2; 
+    });  
+}
+
+function selectCards() {
+    selectFirstCard(); 
+    selectSecondCard(); 
+    addMove();
+    
+    if(card.classList.contains(card2.classList)){
+    setInterval(function(){
+            card.classList.remove('open', 'show');
+            card2.classList.remove('open', 'show'); 
+     }, 1111);
+    }
+    else{
+        console.log("This is a match!");
+        matched = matched + 1;
+        } 
+        if (matched === 16) {
+            userWins(); 
+    }
+
 }
 
 function startMemoryGame() {
@@ -193,7 +211,7 @@ function startMemoryGame() {
         return generateCards(cardClassesList);
     });
     console.log("The game has started!");
-    moveHandler();
+    selectCards();
     addMove();
     startTimer();
     cardChecker();
