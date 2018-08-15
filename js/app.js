@@ -155,13 +155,13 @@ clearInterval(interval);
 document.onload = startMemoryGame();
 
 function selectFirstCard() { 
-    deck.addEventListener("click", function(event) { 
+    card.addEventListener("click", function(event) { 
         card = event.target;
         card.classList.add('open', 'show');
         openCards.push(card); 
         return card; 
     }); 
-    deck.removeEventListener("click", function(event) { 
+    card.removeEventListener("click", function(event) { 
         card = event.target;
         card.classList.add('open', 'show');
         openCards.push(card); 
@@ -169,13 +169,13 @@ function selectFirstCard() {
     });  
 }
 function selectSecondCard() {
-    deck.addEventListener("click", function(event) { 
+    card2.addEventListener("click", function(event) { 
         card2 = event.target;
         card2.classList.add('open','show');
         openCards.push(card2);
         return card2; 
     });
-    deck.removeEventListener("click", function(event) { 
+    card2.removeEventListener("click", function(event) { 
         card2 = event.target;
         card2.classList.add('open','show');
         openCards.push(card2);
