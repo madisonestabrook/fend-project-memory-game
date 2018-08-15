@@ -1,20 +1,21 @@
 # Memory Game Project
-
+By Madison Estabrook 
 ## Table of Contents
 
-* [Instructions](#instructions)
-* [Contributing](#contributing)
+* [How to Use This Game](#How to Use This Game)
+* [Thanks](#Thanks)
 
-## Instructions
+## How to Use This Game
+Complete the following steps to use this game: 
+- Open index.html in your preferred browser
+- Click on a card 
+- Click on a second card 
+- If your cards do not match, try again 
 
-The starter project has some HTML and CSS styling to display a static version of the Memory Game project. You'll need to convert this project from a static project to an interactive one. This will require modifying the HTML and CSS files, but primarily the JavaScript file.
-
-To get started, open `js/app.js` and start building out the app's functionality
-
-For specific, detailed instructions, look at the project instructions in the [Udacity Classroom](https://classroom.udacity.com/me).
-
-## Contributing
-
-This repository is the starter code for _all_ Udacity students. Therefore, we most likely will not accept pull requests.
-
-For details, check out [CONTRIBUTING.md](CONTRIBUTING.md).
+This game is written with HTML, CSS, and (vanilla) JavaScript. You do _not_ need any special products to use this game! Enjoy. 
+## Thanks
+I would like to thank the following: 
+- Google and Udacity for providing me with such an amazing opportunity 
+- RQ (my significant other) and my parents/doggies for always supporting me, even during the hard/tough times 
+- Micheal Jackson, a fellow Google FEND Scholar, for supporting me 
+- @drunkenkismet for looking at my JavaScript code 
