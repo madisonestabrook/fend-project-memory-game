@@ -20,6 +20,7 @@ let cardClassesList = [
 
 let deck = document.querySelector('.deck');
 let card = document.querySelectorAll(".card");
+let card2 = document.querySelectorAll(".card"); 
 
 
 // From Ryan 
@@ -56,6 +57,8 @@ let stars = document.querySelectorAll('.fa fa-star');
 let seconds = 0;
 let minutes = 0;
 let hours = 0;
+let openCards = [];
+let openCardClassList = []; 
 let interval;
 
 let moves = 0;
@@ -63,7 +66,7 @@ let allCards = deck.querySelectorAll('li');
 let matched = 0;
 let cardHTML = [];
 
-let modal = document.querySelector('section');
+let modal = document.getElementById('myDiv');
 let closeIcon = document.querySelector('.closeIcon');
 
 let clock = document.querySelector('.clock');
@@ -93,7 +96,7 @@ function resetMoves() {
 }
 
 function addMove() {
-    moves++;
+    moves = moves + 1;
     let movesText = document.querySelector('.moves');
 
     movesText.innerHTML = moves;
@@ -154,35 +157,34 @@ document.onload = startMemoryGame();
 
 function moveHandler() {
     deck.addEventListener("click", function(event) {
-//allCards.forEach(function(card, event) {
             card = event.target;
     deck.addEventListener("click", function(event) {
-            let card2  = event.target;
-           //if (card.classList.contains('open') || card.classList.contains('show') && openCards.length < 2) {
-                //console.log("Add an open card");
-                //openCards.push(card);
-                card.classList.add('open', 'show');
-                card2.classList.add('open','show');
-                    addMove();
-                    if(card.classList.contains(cardClassesList) == card2.classList.contains(cardClassesList)){
-                    //if (openCards[0].dataSet.card == openCards[1].dataSet.card) {
-                        console.log("This is a match!");
-                        matched++;
+            card2  = event.target;
+
+         card2 = event.target; 
+                        card.classList.add('open', 'show');
+                        card2.classList.add('open','show');
+                            addMove();
+                            openCards.push(card);  
+                            openCards.push(card2);
+
+                    if(card.classList === card2.classList){
+                    setInterval(function(){
+                            card.classList.remove('open', 'show');
+                            card2.classList.remove('open', 'show'); 
+                     }, 1111);
                     }
-                        if (matched === 8) {
+                    else{
+                        console.log("This is a match!");
+                        matched = matched + 1;
+                        } 
+                        if (matched === 16) {
                             userWins();
                         }
-                        else {
-                            setInterval(function(){
-                                   card.classList.remove('open', 'show');
-                                   card2.classList.remove('open', 'show'); 
-                            }, 10000);
-                        }
-//} 
+
         });
-    });
+    }); 
 }
-   // });
 
 function startMemoryGame() {
 
@@ -245,14 +247,19 @@ document.querySelector('.fa-repeat').addEventListener("click", playAgain);
         clearInterval(interval);
         finalTime = clock.innerHTML;
 
+        modal.classList.remove('hide');
         modal.classList.add('show');
-        let starRating = document.querySelector('.stars').innerHTML;
+        let starRating = document.querySelectorAll('.stars');
 
-        let moves=  document.getElementById('modal_moves').innerHTML;
-        starRating = document.getElementById('modal_stars').innerHTML;
-        finalTime = document.getElementById('modal_time').innerHTML;
+        //document.getElementsByClassName('modal_moves').insertAdjacentHTML('beforebegin', moves);
+        //document.getElementsByClassName('modal_moves').assign(moves);
+        //Object.assign(moves, document.getElementsByClassName('modal_moves'));
+        //Object.assign(starRating, document.getElementsByClassName('modal_stars')); 
+        document.getElementsByClassName('modal_moves').setAttribute('moves = ', moves);
+        document.getElementsByClassName('modal_stars').textContent = starRating;
+        document.getElementsByClassName('modal_time').textContent = finalTime;
 
-        closeModal();
+        //closeModal();
     }
 
     //document.querySelector('.restart').addEventListener('click', playAgain());
