@@ -38,6 +38,11 @@ footer {
     text-align: center;
     justify-content: center;
 }
+
+.stars li { 
+    list-style: none; 
+    display: inline-block; 
+}
 /*
  * Styles for the deck of cards
  */
