@@ -2,10 +2,10 @@
 By Madison Estabrook 
 ## Table of Contents
 
-* [How to Use This Game](#How to Use This Game)
+* [Directions](#Directions)
 * [Thanks](#Thanks)
 
-## How to Use This Game
+## Directions
 Complete the following steps to use this game: 
 - Open index.html in your preferred browser
 - Click on a card 
