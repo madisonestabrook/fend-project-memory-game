@@ -17,5 +17,5 @@ This game is written with HTML, CSS, and (vanilla) JavaScript. You do _not_ need
 I would like to thank the following: 
 - Google and Udacity for providing me with such an amazing opportunity 
 - RQ (my significant other) and my parents/doggies for always supporting me, even during the hard/tough times 
-- Micheal Jackson, a fellow Google FEND Scholar, for supporting me 
+- [Michael Jackson](https://github.com/MJ94), a fellow Google FEND Scholar, for supporting me 
 - @drunkenkismet for looking at my JavaScript code 
