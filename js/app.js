@@ -62,7 +62,6 @@ let openCardClassList = [];
 let interval;
 
 let moves = 0;
-let allCards = deck.querySelectorAll('li');
 let matched = 0;
 let cardHTML = [];
 
@@ -137,8 +136,14 @@ function startTimer() {
     }
 
 deck.innerHTML = cardHTML.join('');
-allCards = document.querySelectorAll('.card');
-allCards.forEach(selectCards); 
+
+const cards = document.getElementsByClassName('.card'); 
+const allCards = [... cards]; 
+allCards.forEach(function(cards) {
+    allCards.addEventListener("click", function(event){
+        allCards.push(event.target); 
+    });
+});
 
 for (stars of starList) {
     {
@@ -211,11 +216,11 @@ function startMemoryGame() {
         return generateCards(cardClassesList);
     });
     console.log("The game has started!");
-    selectCards();
-    addMove();
     startTimer();
+    selectCards(); 
     cardChecker();
-    checkScore(); 
+    checkScore();
+    addMove();
 }
 
     //allCards.forEach(moveHandler);
