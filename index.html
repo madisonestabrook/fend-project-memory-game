@@ -16,25 +16,25 @@
         </header>
 
         <section class="score-panel">
-        	<ul class="stars">
+        	<ul class="stars"> <p>Your Score:</p>
         		<li><i class="fa fa-star"></i></li>
         		<li><i class="fa fa-star"></i></li>
         		<li><i class="fa fa-star"></i></li>
         	</ul>
 
         	<span class="moves">N</span> Moves
-            <div class="restart">
+            <div class="restart" onclick="reset()">
         		<i class="fa fa-repeat"></i>
             </div>
             <!-- new clock element-->
         <span class="clock">
-            <span class="min" role="minutes">00</span>:<span class="sec" role="seconds"00></span>
+            <span class="min" role="minutes">00</span>:<span class="sec" role="seconds">00</span>
         </span>
         <div class = "modal_background hide" id="myDiv">
             <div class="modal_body"></div>
             <div class="modal_heading"></div>
                 <h1 class="modal_title">Stats</h1>
-                <span class= "restart closeIcon" onclick="startMemoryGame()">x</span> 
+                <span class= "restart closeIcon" onclick="reset()">x</span> 
                <div class="modal_stats"> 
                     <span class="modal_time">Time =</span>
                     <span class="modal_stars">Stars =</span>

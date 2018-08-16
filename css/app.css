@@ -39,9 +39,10 @@ footer {
     justify-content: center;
 }
 
-.stars li { 
+.score-panel, i { 
     list-style: none; 
     display: inline-block; 
+    text-align: center; 
 }
 /*
  * Styles for the deck of cards
