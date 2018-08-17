@@ -9,8 +9,7 @@ let deck = document.querySelector(".deck");
 const moveCounterCONST = document.querySelector('.moves'); 
 let star = document.getElementsByClassName("fa-star"); 
 let stars = [... star]; 
-let i, gameTime, results; 
-const matchedCard = document.getElementsByClassName("match"); 
+let i, gameTime, results, matchedCard; 
 const modal = document.getElementById("myDiv"); 
 const min = document.querySelector('.min'); 
 const sec = document.querySelector('.sec'); 
@@ -45,7 +44,7 @@ function startGame() {
         card.classList.remove("show", "open", "match"); 
         deck.appendChild(card); 
         }); // For each card, remove the classes "show", "open", and "match"; also, add each card to the deck  
-    moves = 0; 
+    moves = matchedCard = 0; 
     stars.length = 3; 
     stars.forEach(function(star) {
         star.className = ' '; 
@@ -100,19 +99,33 @@ Object.defineProperty(HTMLElement.prototype, "classListChain", {
     }
   });
 
+// matchInHeaven Function 
+  function matchInHeaven() {
+for(i=0; i < openedCards.length; i++) { 
+        openedCards[i] !== openedCards[i+1];
+        return false; 
+}
+for(i=0; i < openedCards.length; i++) { 
+    openedCards[i] === openedCards[i+1];
+    return true; 
+}
+}
+
 // matchedEval() Function 
-function matchedEval() { 
+function matchedEval() {
     openedCards.push(this); // Add the current card to the list of opened card
     moveCounter();  // Call the moveCounter() function
-    if(openedCards.length === 1) { // If there are 2 opened cards,
-    if(openedCards[1] !== openedCards[0]){ /* 
-        If the cards do NOT match */
-        weDoNotHaveAMatch(); // Call the weDoNotHaveAMatch function 
+    if(openedCards.length >= 1) { // If there are 2 opened cards,
+    if(matchInHeaven === false){ /* 
+        If the cards match */
+            weDoNotHaveAMatch(); 
     }
-    else{ 
-        weGotAMatch(); 
+    else if(matchInHeaven === true) { 
+        weGotAMatch(); // Call the weDoNotHaveAMatch function
+        matchedCard++; 
     }
     }
+
 }
 
 
@@ -120,7 +133,7 @@ function matchedEval() {
 //weGotAMatch() Function  
 function weGotAMatch() { 
     console.log("Your cards match!"); // Prints the message in quotes to the console 
-    for(i = 0; i < openedCards.length - 1; i++) { 
+    for(i = 0; i < openedCards.length; i++) { 
         openedCards[i].classListChain.add("match").classListChain.remove("show", "open"); 
     }
     openedCards = []; // Resets the openedCards variable
@@ -129,7 +142,7 @@ function weGotAMatch() {
 // weDoNotHaveAMatch() Function
 function weDoNotHaveAMatch() { 
     setTimeout(function() { // In the number of ms declared on line 136, 
-        for(i=0; i < openedCards.length-1; i++) { 
+        for(i=0; i < openedCards.length; i++) { 
             openedCards[i].classListChain.remove("show","open", "matched");      
         }
             openedCards = []; 
@@ -198,7 +211,7 @@ function removeAllStars() {
 
 // gameOver() Function 
 function gameOver() {
-    if(matchedCard.length === 16 || moves >= 18) {  // If there are 16 matches or 10 moves, 
+    if(matchedCard.length === 16 || moves >= 36) {  // If there are 16 matches or 10 moves, 
         clearInterval(gameTime); // Clear the internal of gameTime
         let finalTime = `${min.innerHTML}:${sec.innerHTML}`; // Grabs the final time
         results = setTimeout(function() {
