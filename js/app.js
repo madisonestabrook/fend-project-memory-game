@@ -101,13 +101,20 @@ Object.defineProperty(HTMLElement.prototype, "classListChain", {
 
 // matchInHeaven Function 
   function matchInHeaven() {
-for(i=0; i < openedCards.length; i++) { 
-        openedCards[i] !== openedCards[i+1];
+for(i=0; i<openedCards.length; i ++) { 
+    switch(openedCards[i]===(openedCards[i+1])){ 
+        case true: 
+        return true; 
+        break; 
+
+        case false:
         return false; 
-}
-for(i=0; i < openedCards.length; i++) { 
-    openedCards[i] === openedCards[i+1];
-    return true; 
+        break; 
+
+        default: 
+        console.log("Error with the matchInHeaven function"); 
+        break; 
+    }
 }
 }
 
@@ -116,14 +123,14 @@ function matchedEval() {
     openedCards.push(this); // Add the current card to the list of opened card
     moveCounter();  // Call the moveCounter() function
     if(openedCards.length >= 1) { // If there are 2 opened cards,
-    if(matchInHeaven === false){ /* 
+    if(openedCards.some(matchInHeaven) === false){ /* 
         If the cards match */
-            weDoNotHaveAMatch(); 
+            weDoNotHaveAMatch();
     }
-    else if(matchInHeaven === true) { 
+    if(openedCards.some(matchInHeaven)) { 
         weGotAMatch(); // Call the weDoNotHaveAMatch function
         matchedCard++; 
-    }
+    } 
     }
 
 }
@@ -211,7 +218,7 @@ function removeAllStars() {
 
 // gameOver() Function 
 function gameOver() {
-    if(matchedCard.length === 16 || moves >= 36) {  // If there are 16 matches or 10 moves, 
+    if(matchedCard.length === 16 || moves >= 16) {  // If there are 16 matches or 10 moves, 
         clearInterval(gameTime); // Clear the internal of gameTime
         let finalTime = `${min.innerHTML}:${sec.innerHTML}`; // Grabs the final time
         results = setTimeout(function() {
