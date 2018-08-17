@@ -101,8 +101,8 @@ Object.defineProperty(HTMLElement.prototype, "classListChain", {
 
 // matchInHeaven Function 
   function matchInHeaven() {
-for(i=0; i<openedCards.length; i ++) { 
-    switch(openedCards[i]===(openedCards[i+1])){ 
+for(i=0; i< openedCards.length; i ++) { 
+    switch(openedCards[i] === (openedCards[i+1])){ 
         case true: 
         return true; 
         break; 
@@ -123,11 +123,11 @@ function matchedEval() {
     openedCards.push(this); // Add the current card to the list of opened card
     moveCounter();  // Call the moveCounter() function
     if(openedCards.length >= 1) { // If there are 2 opened cards,
-    if(openedCards.some(matchInHeaven) === false){ /* 
+    if(openedCards.findIndex(matchInHeaven) === -1) { /* 
         If the cards match */
             weDoNotHaveAMatch();
     }
-    if(openedCards.some(matchInHeaven)) { 
+    else if(openedCards.findIndex(matchInHeaven) != -1) { 
         weGotAMatch(); // Call the weDoNotHaveAMatch function
         matchedCard++; 
     } 
