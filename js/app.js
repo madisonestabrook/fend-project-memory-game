@@ -7,7 +7,7 @@ let moves = 0;
 let oneCount = 0; 
 let deck = document.querySelector(".deck");
 const moveCounterCONST = document.querySelector('.moves'); 
-const star = document.querySelectorAll(".stars"); 
+const star = document.getElementsByClassName(".fa-star"); 
 let stars = [... star]; 
 let i, gameTime, results; 
 const matchedCard = document.getElementsByClassName("match"); 
@@ -20,7 +20,7 @@ const playAgainButton = document.querySelector(".modal_replay");
 
 // Shuffle Function (NOT MINE)
 function shuffle(array) {
-    var currentIndex = array.length,
+    let currentIndex = array.length,
         temporaryValue, randomIndex;
 
     while (currentIndex !== 0) {
@@ -84,23 +84,6 @@ function flipCard(){
     this.classList.toggle('show'); 
 } // For each of the card classes above, toggle (see https://developer.mozilla.org/en-US/docs/Web/API/Element/classList for more info)
 
-
-// matchedEval() Function 
-function matchedEval() { 
-    openedCards.push(this); // Add the current card to the list of opened card
-    if(openedCards.length === 2) { // If there are 2 opened cards, 
-        moveCounter();  // Call the moveCounter() function
-    if(openedCards[0].firstElementChild.getAttribute("class") === openedCards[1].firstElementChild.getAttribute("class")){ /* 
-        If the first element (index 0) of openedCard's firstElementChild's class matches the same for the second element (index 1) of opened cards */
-        weGotAMatch(); // Call the weGotAMatch function 
-    }
-    else if(openedCards[0].firstElementChild.getAttribute("class") !== openedCards[1].firstElementChild.getAttribute("class")) { 
-        // If the opened card's classes do NOT match, 
-        weDoNotHaveAMatch();  // Call the weDoNotHaveAMatch function
-    }
-    }
-}
-
 // Thank you @drunkenismet for this OOP snippet and again for helping me
 Object.defineProperty(HTMLElement.prototype, "classListChain", {
     get: function () {
@@ -118,6 +101,24 @@ Object.defineProperty(HTMLElement.prototype, "classListChain", {
     }
   });
 
+// matchedEval() Function 
+function matchedEval() { 
+    openedCards.push(this); // Add the current card to the list of opened card
+    if(openedCards.length === 2) { // If there are 2 opened cards, 
+        moveCounter();  // Call the moveCounter() function
+    if(openedCards[0].innerHTML === (openedCards[1].innerHTML)){ /* 
+        If the first element (index 0) of openedCard's firstElementChild's class matches the same for the second element (index 1) of opened cards */
+        weGotAMatch(); // Call the weGotAMatch function 
+    }
+    else if(openedCards[0].firstElementChild.getAttribute("class") !== openedCards[1].firstElementChild.getAttribute("class")) { 
+        // If the opened card's classes do NOT match, 
+        weDoNotHaveAMatch();  // Call the weDoNotHaveAMatch function
+    }
+    }
+}
+
+
+
 //weGotAMatch() Function  
 function weGotAMatch() { 
     console.log("Your cards match!"); // Prints the message in quotes to the console 
@@ -128,7 +129,7 @@ function weGotAMatch() {
 
 // weDoNotHaveAMatch() Function
 function weDoNotHaveAMatch() { 
-    setTimeout(function() { // In the number of ms declared on line 135, 
+    setTimeout(function() { // In the number of ms declared on line 136, 
             openedCards[0].classListChain.remove("show", "open", "matched"); // Removes the 3 listed classes from the first card
             openedCards[1].classListChain.remove("show", "open", "matched"); // Removes the 3 listed classes from the second card
             openedCards = []; 
@@ -138,7 +139,7 @@ function weDoNotHaveAMatch() {
 // moveCounter() Function
 function moveCounter() { 
     moves++; 
-    (moves !== 1) ? (moveCounterCONST.innerHTML = `${moves} moves`) : ((moveCounterCONST.innerHTML = `${moves} move`), (seconds = 0, minutes = 0));
+    (moves !== 1) ? (moveCounterCONST.innerHTML = `${moves}`) : ((moveCounterCONST.innerHTML = `${moves}`), (seconds = 0, minutes = 0));
      // Ternary statement (condition) : (if-true-then): (if-false-then) 
     if(moves > 9 && moves <= 12) { // If moves is greater than 9 and less than or equal to 12, 
         removeSomeStars(); // Call the removeSomeStars() function
@@ -168,7 +169,7 @@ function startTimer() {
             if(minutes > 9) { 
                 min.innerHTML =  `${minutes}`; 
             } // The function above displays the time in an easy-to-read format
-    }, 1000);
+    }, 10000);
 }
 
 // clickToStart() Function
@@ -181,29 +182,29 @@ function clickToStart() {
 
 // removeSomeStars() Function
 function removeSomeStars() { 
-    stars[i].classListChain.remove("fa-star").classListChain.add("fa-star-half");
+    stars[i].classList.remove("fa-star").classList.add("fa-star-half");
     // Adds and removes classes from stars
 }
 
 // removeAllStars() Function 
 function removeAllStars() { 
-    stars[i].classListChain.remove('fas',"fa-star-half").classListChain.add("far", "fa-star"); 
+    stars[i].classList.remove('fas',"fa-star-half").classList.add("far", "fa-star"); 
     // Adds and removes classes from stars 
 }
 
 // gameOver() Function 
 function gameOver() {
-    if(matchedCard.length === 16) {  // If there are 16 matches, 
+    if(matchedCard.length === 16 || moves >= 10) {  // If there are 16 matches or 10 moves, 
         clearInterval(gameTime); // Clear the internal of gameTime
-        let finalTime = `${min.innerHTML}:${secs.innerHTML}`; // Grabs the final time
+        let finalTime = `${min.innerHTML}:${sec.innerHTML}`; // Grabs the final time
         results = setTimeout(function() {
             modal.style.display = 'block';
-        }, 2000); 
+        }, 3000); 
 
-    let starScore = document.querySelector('.stars').innerHTML; 
-    let totalMoves = document.querySelector('.modal_moves'); 
-    document.querySelector(".modal_stars") = starScore; 
-    document.getElementById('modal_time').innerHTML = finalTime; 
+    let starScore = document.querySelector('.fa-star').innerHTML; 
+    let totalMoves = document.querySelector('.modal_moves').innerHTML = 'Moves: ' + moves ; 
+    document.querySelector(".modal_stars").innerHTML = starScore; 
+    document.querySelector('.modal_time').innerHTML = finalTime; 
     }
 }
 

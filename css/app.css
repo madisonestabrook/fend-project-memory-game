@@ -167,3 +167,7 @@ footer {
     float: right;
     cursor: pointer;
 }
+
+.fa-star, .fa-star-half { 
+    font-size: 14px; /* Makes stars easier to see and understand */
+}
