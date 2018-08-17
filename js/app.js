@@ -99,40 +99,21 @@ Object.defineProperty(HTMLElement.prototype, "classListChain", {
     }
   });
 
-// matchInHeaven Function 
-  function matchInHeaven() {
-for(i=0; i< openedCards.length; i ++) { 
-    switch(openedCards[i] === (openedCards[i+1])){ 
-        case true: 
-        return true; 
-        break; 
-
-        case false:
-        return false; 
-        break; 
-
-        default: 
-        console.log("Error with the matchInHeaven function"); 
-        break; 
-    }
-}
-}
 
 // matchedEval() Function 
 function matchedEval() {
     openedCards.push(this); // Add the current card to the list of opened card
     moveCounter();  // Call the moveCounter() function
     if(openedCards.length >= 1) { // If there are 2 opened cards,
-    if(openedCards.findIndex(matchInHeaven) === -1) { /* 
-        If the cards match */
-            weDoNotHaveAMatch();
+        let test = Object.is(openedCards[1], openedCards[0]); // Declares a variable, test, that tests if openedCards[1] equals openedCards[0]
+        if(test === false) { // If test is false
+            weDoNotHaveAMatch(); // Call the weDoNotHaveAMatch() Function
+        }
+        else if (test === true) { // If test is true
+            weGotAMatch();  // Call the weGotAMatch() Function
+            matchedCard++; // Add values to the variable matchedCard 
+        }
     }
-    else if(openedCards.findIndex(matchInHeaven) != -1) { 
-        weGotAMatch(); // Call the weDoNotHaveAMatch function
-        matchedCard++; 
-    } 
-    }
-
 }
 
 
