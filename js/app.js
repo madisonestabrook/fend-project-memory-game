@@ -127,6 +127,8 @@ function weDoNotHaveAMatch() {
             openedCards[i].removeEventListener("click", function() { 
                             matchedEval; 
                             flipCard; 
+                            moveCounter;
+                            weGotAMatch; 
             }); 
             //openedCards[i].removeEventListener("click", matchedEval()); 
             //openedCards[i].children.classList.add("hide");
@@ -156,14 +158,14 @@ function matchedEval() {
     //if(openedCards.length === 1) { // If there are 2 opened cards,
         moveCounter();  // Call the moveCounter() function
         //let test = Object.is(openedCards[1], openedCards[0]); // Declares a variable, test, that tests if openedCards[1] equals openedCards[0]
-        let test = checkerFunction(openedCards, openedCards[openedCards.length]); 
+        let test = checkerFunction(openedCards,(event.target)); 
         if(test || test === true || test == true){ 
-            weGotAMatch(); 
-            matchedCard++;
+            weDoNotHaveAMatch(); 
            
         }
         else if (test != true){ 
-            weDoNotHaveAMatch(); 
+            weGotAMatch(); 
+            matchedCard++;
         }
     }
 //}

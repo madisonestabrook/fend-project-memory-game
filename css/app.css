@@ -144,8 +144,12 @@ footer {
     height: 30px;
 }
 
+.hide { 
+    display: none; 
+}
 .hide, .card.hide{ 
-    display: none;  
+    /* display: none; */ 
+     color: azure; 
 }
 .score-panel {
     text-align: left;
