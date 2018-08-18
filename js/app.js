@@ -1,5 +1,5 @@
 // Coding by Madison Estabrook in vanilla JavaScript ES6
-
+// ToDo: fix card matching issue 
 // Global Variables
 let card = document.getElementsByClassName('card');
 let cards = [... card];
@@ -105,16 +105,28 @@ function matchedEval() {
     openedCards.push(this); // Add the current card to the list of opened card
     moveCounter();  // Call the moveCounter() function
     if(openedCards.length >= 1) { // If there are 2 opened cards,
-        let test = Object.is(openedCards[1], openedCards[0]); // Declares a variable, test, that tests if openedCards[1] equals openedCards[0]
-        if(test === false) { // If test is false
+        //let test = Object.is(openedCards[1], openedCards[0]); // Declares a variable, test, that tests if openedCards[1] equals openedCards[0]
+        let test = function() {
+            if(openedCards[1] = openedCards[0]) { 
+            return false; 
+        }
+        else { 
+            return true; 
+        }
+    }
+        if(test = false) { // If test is false
             weDoNotHaveAMatch(); // Call the weDoNotHaveAMatch() Function
         }
-        else if (test === true) { // If test is true
+        else if(test == true) { // If test is true
             weGotAMatch();  // Call the weGotAMatch() Function
             matchedCard++; // Add values to the variable matchedCard 
         }
+        else {
+            if(Object.values)
+            weDoNotHaveAMatch(); 
+        }
+        }
     }
-}
 
 
 
@@ -199,7 +211,7 @@ function removeAllStars() {
 
 // gameOver() Function 
 function gameOver() {
-    if(matchedCard.length === 16 || moves >= 16) {  // If there are 16 matches or 10 moves, 
+    if(matchedCard.length === 16 || moves >= 18) {  // If there are 16 matches or 10 moves, 
         clearInterval(gameTime); // Clear the internal of gameTime
         let finalTime = `${min.innerHTML}:${sec.innerHTML}`; // Grabs the final time
         results = setTimeout(function() {

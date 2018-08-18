@@ -39,7 +39,7 @@ footer {
     justify-content: center;
 }
 
-.score-panel, i { 
+.score-panel { 
     list-style: none; 
     display: inline-block; 
     text-align: center; 
@@ -160,7 +160,6 @@ footer {
 
 .score-panel .stars li {
     list-style: none;
-    display: inline-block;
 }
 
 .score-panel .restart {
@@ -169,6 +168,5 @@ footer {
 }
 
 .fa-star, .fa-star-half { 
-    font-size: 14px; /* Makes stars easier to see and understand */
-    list-style: none; 
+    font-size: 14px; /* Makes stars easier to see and understand */ 
 }
