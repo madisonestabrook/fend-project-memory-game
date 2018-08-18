@@ -98,7 +98,11 @@ Object.defineProperty(HTMLElement.prototype, "classListChain", {
       };
     }
   });
-
+ function checkerFunction(arr, val) { 
+     return arr.some(function(arrVal) {
+         return val === arrVal; 
+     });  
+ }
 
 // matchedEval() Function 
 function matchedEval() {
@@ -122,8 +126,21 @@ function matchedEval() {
             matchedCard++; // Add values to the variable matchedCard 
         }
         else {
-            if(Object.values)
-            weDoNotHaveAMatch(); 
+            let test2 = function() {
+                if(openedCards[1].getAttribute.className()!= openedCards[0].getAttribute.className()) { 
+                    return false; 
+                }
+                else {
+                    return true; 
+                }
+            }
+            if(test2 = false){
+                weDoNotHaveAMatch(); 
+            }
+            else if (test2) { 
+                weGotAMatch(); 
+                matchedCard++; 
+            }
         }
         }
     }
