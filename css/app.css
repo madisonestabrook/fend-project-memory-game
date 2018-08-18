@@ -15,7 +15,9 @@ body {
     margin: 0;
     padding: 0;
 }
-
+p, span { 
+    text-align: center; 
+}
 body {
     background: #ffffff url('../img/geometry2.png'); /* Background pattern from Subtle Patterns */
     font-family: 'Coda', cursive;
@@ -83,6 +85,7 @@ footer {
 
 .deck .card.show {
     font-size: 33px;
+    background: pink; 
 }
 
 .deck .card.match {
@@ -141,8 +144,8 @@ footer {
     height: 30px;
 }
 
-.hide{ 
-    display: none; 
+.hide, .card.hide{ 
+    display: none;  
 }
 .score-panel {
     text-align: left;

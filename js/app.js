@@ -78,8 +78,8 @@ function cardClicks(){
 
 // flipCard() Function 
 function flipCard(){ 
-    this.classList.toggle('open'); 
-    this.classList.toggle('show'); 
+    event.target.classList.toggle('open'); 
+    event.target.classList.toggle('show'); 
 } // For each of the card classes above, toggle (see https://developer.mozilla.org/en-US/docs/Web/API/Element/classList for more info)
 
 // Thank you @drunkenismet for this OOP snippet and again for helping me
@@ -118,29 +118,34 @@ function weGotAMatch() {
 
 // weDoNotHaveAMatch() Function
 function weDoNotHaveAMatch() { 
-    if(openedCards.length >= 1) {
+    //if(openedCards.length >= 1) {
     setTimeout(function() { // In the number of ms declared on line 136, 
         for(i=0; i < openedCards.length; i++) { 
             openedCards[i].classList.remove("show","open", "matched"); 
             openedCards[i].classList.add("hide"); 
-            openedCards[i].children.className = "hide"; 
+            openedCards[i].children.className = "hide";
+            openedCards[i].removeEventListener("click", function() { 
+                            matchedEval; 
+                            flipCard; 
+            }); 
+            //openedCards[i].removeEventListener("click", matchedEval()); 
             //openedCards[i].children.classList.add("hide");
             
         }
             openedCards = []; 
     }, 678); 
 }
-}
+//}
 // moveCounter() Function
 function moveCounter() { 
     moves++; 
     (moves !== 1) ? (moveCounterCONST.innerHTML = `${moves}`) : ((moveCounterCONST.innerHTML = `${moves}`), (seconds = 0, minutes = 0));
      // Ternary statement (condition) : (if-true-then): (if-false-then) 
     if(moves < 9 && moves <= 7) { // If moves is greater than 9 and less than or equal to 12, 
-        removeSomeStars(); // Call the removeSomeStars() function
+        removeSomeStars(); // Call the removeSomeStars() function 
     }
     if(moves > 7 && moves < 15) { // If moves is greater than 7 and less than 15, 
-        removeAllStars(); // Call the removeAllStats() function
+        removeAllStars(); // Call the removeAllStats() 
     }
     return moves; // Return moves
 }
@@ -148,7 +153,7 @@ function moveCounter() {
 // matchedEval() Function 
 function matchedEval() {
     openedCards.push(this); // Add the current card to the list of opened card
-    if(openedCards.length === 1) { // If there are 2 opened cards,
+    //if(openedCards.length === 1) { // If there are 2 opened cards,
         moveCounter();  // Call the moveCounter() function
         //let test = Object.is(openedCards[1], openedCards[0]); // Declares a variable, test, that tests if openedCards[1] equals openedCards[0]
         let test = checkerFunction(openedCards, openedCards[openedCards.length]); 
@@ -161,7 +166,7 @@ function matchedEval() {
             weDoNotHaveAMatch(); 
         }
     }
-}
+//}
 
 // startTimer() Function 
 function startTimer() { 
@@ -198,12 +203,12 @@ function removeSomeStars() {
     for(i = 0; i < stars.length - 2; i++) {
     stars[i].classList.add("hide");
     // Removes classes from stars
-}
+} 
 }
 
 // removeAllStars() Function 
 function removeAllStars() { 
-    for(i= 0;i < stars.length - 1; i++) {
+    for(i= 0;i < stars.length; i++) {
     stars[i].classList.add('hide'); 
     // Adds and removes classes from stars 
 }
