@@ -98,53 +98,13 @@ Object.defineProperty(HTMLElement.prototype, "classListChain", {
       };
     }
   });
+
+  // Function mostly from the MDN (see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some#Checking_whether_a_value_exists_in_an_array for more info)
  function checkerFunction(arr, val) { 
      return arr.some(function(arrVal) {
-         return val === arrVal; 
+         return val == arrVal; 
      });  
  }
-
-// matchedEval() Function 
-function matchedEval() {
-    openedCards.push(this); // Add the current card to the list of opened card
-    moveCounter();  // Call the moveCounter() function
-    if(openedCards.length >= 1) { // If there are 2 opened cards,
-        //let test = Object.is(openedCards[1], openedCards[0]); // Declares a variable, test, that tests if openedCards[1] equals openedCards[0]
-        let test = function() {
-            if(openedCards[1] = openedCards[0]) { 
-            return false; 
-        }
-        else { 
-            return true; 
-        }
-    }
-        if(test = false) { // If test is false
-            weDoNotHaveAMatch(); // Call the weDoNotHaveAMatch() Function
-        }
-        else if(test == true) { // If test is true
-            weGotAMatch();  // Call the weGotAMatch() Function
-            matchedCard++; // Add values to the variable matchedCard 
-        }
-        else {
-            let test2 = function() {
-                if(openedCards[1].getAttribute.className()!= openedCards[0].getAttribute.className()) { 
-                    return false; 
-                }
-                else {
-                    return true; 
-                }
-            }
-            if(test2 = false){
-                weDoNotHaveAMatch(); 
-            }
-            else if (test2) { 
-                weGotAMatch(); 
-                matchedCard++; 
-            }
-        }
-        }
-    }
-
 
 
 //weGotAMatch() Function  
@@ -178,6 +138,24 @@ function moveCounter() {
         removeAllStars(); // Call the removeAllStats() function
     }
     return moves; // Return moves
+}
+
+// matchedEval() Function 
+function matchedEval() {
+    openedCards.push(event.target); // Add the current card to the list of opened card
+    if(openedCards.length === 1) { // If there are 2 opened cards,
+        moveCounter();  // Call the moveCounter() function
+        //let test = Object.is(openedCards[1], openedCards[0]); // Declares a variable, test, that tests if openedCards[1] equals openedCards[0]
+        let test = checkerFunction(openedCards, openedCards[openedCards.length]); 
+        if(test || test === true || test == true){ 
+            weGotAMatch(); 
+            matchedCard++;
+           
+        }
+        else if (test != true){ 
+            weDoNotHaveAMatch(); 
+        }
+    }
 }
 
 // startTimer() Function 
@@ -229,9 +207,9 @@ function removeAllStars() {
 // gameOver() Function 
 function gameOver() {
     if(matchedCard.length === 16 || moves >= 18) {  // If there are 16 matches or 10 moves, 
-        clearInterval(gameTime); // Clear the internal of gameTime
+        clearTimeout(gameTime); // Clear the internal of gameTime
         let finalTime = `${min.innerHTML}:${sec.innerHTML}`; // Grabs the final time
-        results = setTimeout(function() {
+        results = setInterval(function() {
             modal.style.display = 'block';
         }, 3000); 
 
@@ -239,7 +217,8 @@ function gameOver() {
     let totalMoves = document.querySelector('.modal_moves').innerHTML = 'Moves: ' + moves ; 
     document.querySelector(".modal_stars").innerHTML = starScore; 
     document.querySelector('.modal_time').innerHTML = finalTime;
-    playAgainButton.addEventListener("click", reset);  
+    playAgainButton.addEventListener("click", reset);
+    moves = 0; 
     }
 }
 
