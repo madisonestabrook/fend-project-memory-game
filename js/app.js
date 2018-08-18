@@ -118,14 +118,19 @@ function weGotAMatch() {
 
 // weDoNotHaveAMatch() Function
 function weDoNotHaveAMatch() { 
+    if(openedCards.length >= 1) {
     setTimeout(function() { // In the number of ms declared on line 136, 
         for(i=0; i < openedCards.length; i++) { 
-            openedCards[i].classListChain.remove("show","open", "matched");      
+            openedCards[i].classList.remove("show","open", "matched"); 
+            openedCards[i].classList.add("hide"); 
+            openedCards[i].children.className = "hide"; 
+            //openedCards[i].children.classList.add("hide");
+            
         }
             openedCards = []; 
     }, 678); 
 }
-
+}
 // moveCounter() Function
 function moveCounter() { 
     moves++; 
@@ -142,7 +147,7 @@ function moveCounter() {
 
 // matchedEval() Function 
 function matchedEval() {
-    openedCards.push(event.target); // Add the current card to the list of opened card
+    openedCards.push(this); // Add the current card to the list of opened card
     if(openedCards.length === 1) { // If there are 2 opened cards,
         moveCounter();  // Call the moveCounter() function
         //let test = Object.is(openedCards[1], openedCards[0]); // Declares a variable, test, that tests if openedCards[1] equals openedCards[0]

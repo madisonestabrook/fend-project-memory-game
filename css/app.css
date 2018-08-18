@@ -40,7 +40,6 @@ footer {
 }
 
 .score-panel { 
-    list-style: none; 
     display: inline-block; 
     text-align: center; 
 }
@@ -79,7 +78,7 @@ footer {
 .deck .card.open {
     transform: rotate(0);
     background: #02b3e4;
-    cursor: default;
+    cursor: wait;
 }
 
 .deck .card.show {
@@ -87,7 +86,7 @@ footer {
 }
 
 .deck .card.match {
-    cursor: default;
+    cursor: grab;
     background: #02ccba;
     font-size: 33px;
 }
@@ -154,12 +153,7 @@ footer {
 .score-panel .stars {
     margin: 0;
     padding: 0;
-    display: inline-block;
     margin: 0 5px 0 0;
-}
-
-.score-panel .stars li {
-    list-style: none;
 }
 
 .score-panel .restart {
@@ -169,4 +163,5 @@ footer {
 
 .fa-star, .fa-star-half { 
     font-size: 14px; /* Makes stars easier to see and understand */ 
+    color: goldenrod; 
 }
