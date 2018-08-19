@@ -47,7 +47,7 @@ function startGame() {
     moves = matchedCard = 0; 
     stars.length = 3; 
     stars.forEach(function(star) {
-        star.className = ' '; 
+        //star.className = ' '; 
         star.classList.add('fas', 'fa-star'); 
     }); // For each card, reset the className and add the class names "fas" as well as "fa-star"
     seconds = 0; 
@@ -130,11 +130,12 @@ function disableCards() {
 }
 // ableCards() Function inspired by @drunkenismet 
 function enableCards() { 
-    Array.prototype.filter.call(card, function() 
+    Array.prototype.filter.call(cards, function(card) 
     {
+        //Object.defineProperty(card, "disable", card[0]);; 
         card.classList.remove("disabled");
          for(i = 0; i < matchedCard.length; i++) { 
-             matchedCard[i].classList.add("disabled"); 
+             matchedCard[i].classListChain.add("disabled"); 
          } 
     }); 
 }
@@ -144,17 +145,6 @@ function weDoNotHaveAMatch() {
     //if(openedCards.length >= 1) {
     setInterval(function() {
         disableCards(); // In the number of ms declared on line 136, 
-        //for(i=0; i < openedCards.length; i++) { 
-            //if(openedCards[i] = "li.card") {
-            //openedCards[i] = document.querySelector(openedCards[i].toString()); 
-            //this.classList.remove("show","open", "matched"); 
-            //openedCards[i].classList.add("hide"); 
-            //openedCards[i].children.className = "hide";
-            //openedCards[i].removeEventListener("click", matchedEval()); 
-            //openedCards[i].children.classList.add("hide");
-            
-        //}
-   // }
     //openedCards.removeEventListener("click", matchedEval);             
     openedCards = []; 
     }, 678); 
@@ -165,10 +155,10 @@ function moveCounter() {
     moves++; 
     (moves !== 1) ? (moveCounterCONST.innerHTML = `${moves}`) : ((moveCounterCONST.innerHTML = `${moves}`), (seconds = 0, minutes = 0));
      // Ternary statement (condition) : (if-true-then): (if-false-then) 
-    if(moves < 9 && moves <= 7) { // If moves is greater than 9 and less than or equal to 12, 
+    if(moves < 3 && moves <= 5) { // If moves is greater than 9 and less than or equal to 12, 
         removeSomeStars(); // Call the removeSomeStars() function 
     }
-    if(moves > 7 && moves < 15) { // If moves is greater than 7 and less than 15, 
+    if(moves > 5 && moves < 15) { // If moves is greater than 7 and less than 15, 
         removeAllStars(); // Call the removeAllStats() 
     }
     return moves; // Return moves
@@ -177,14 +167,14 @@ function moveCounter() {
 // matchedEval() Function 
 function matchedEval() {
 openedCards.push(this); // Add the current card to the list of opened card
-    if(openedCards.length === 2) { // If there are 2 opened cards,
+    //if(openedCards.length === 2) { // If there are 2 opened cards,
         moveCounter();  // Call the moveCounter() function
         //let test = Object.is(openedCards[1], openedCards[0]); // Declares a variable, test, that tests if openedCards[1] equals openedCards[0]
         let test = checkerFunction(openedCards,(this));
         //let test = myFunction(openedCards, this); 
         if(test || test === true || test == true){ 
             weDoNotHaveAMatch(); 
-            flipCard(); 
+            //flipCard(); 
            
         }
         else if (test != true){ 
@@ -193,7 +183,7 @@ openedCards.push(this); // Add the current card to the list of opened card
 
         }
     }
-}
+//}
 
 // startTimer() Function 
 function startTimer() { 
@@ -255,7 +245,7 @@ function removeAllStars() {
 
 // gameOver() Function 
 function gameOver() {
-    if(matchedCard.length === 16 || moves >= 8) {  // If there are 16 matches or 10 moves, 
+    if(matchedCard.length === 16 || moves >= 16) {  // If there are 16 matches or 10 moves, 
         clearInterval(gameTime); // Clear the interval of gameTime
         let finalTime = `${min.innerHTML}:${sec.innerHTML}:${mil.innerHTML}`; // Grabs the final time
         results = setInterval(function() {
