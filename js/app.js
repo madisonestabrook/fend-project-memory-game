@@ -55,7 +55,7 @@ function startGame() {
     min.innerHTML = '00'; 
     sec.innerHTML = '00';
     cardClicks(); 
-    window.clearInterval(gameTime); 
+    clearInterval(gameTime); 
 }
 
 // stopModal() Function
@@ -80,7 +80,8 @@ function cardClicks(){
 function flipCard(){ 
     event.target.classList.toggle('open'); 
     event.target.classList.toggle('show');
-    event.target.classList.remove('matched');  
+    event.target.classList.toggle('disabled');
+    //event.target.classList.remove('matched'); 
     //event.target.classList.toggle('hide'); 
 } // For each of the card classes above, toggle (see https://developer.mozilla.org/en-US/docs/Web/API/Element/classList for more info)
 
@@ -104,7 +105,7 @@ Object.defineProperty(HTMLElement.prototype, "classListChain", {
   // Function mostly from the MDN (see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some#Checking_whether_a_value_exists_in_an_array for more info)
  function checkerFunction(arr, val) { 
      return arr.some(function(arrVal) {
-         return val == arrVal; 
+         return val === arrVal; 
      });  
  }
 
@@ -115,13 +116,32 @@ function weGotAMatch() {
     for(i = 0; i < openedCards.length -1; i++) { 
         openedCards[i].classListChain.add("match").classListChain.remove("show", "open"); 
     }
+    enableCards(); 
     openedCards = []; // Resets the openedCards variable
+}
+
+// disableCards() Function inspired by @drunkenismet 
+function disableCards() { 
+    Array.prototype.filter.call(card, function(card) {
+        card.classList.add("disable"); 
+    });
+}
+
+function enableCards() { 
+    Array.prototype.filter.call(card, function() 
+    {
+        card.classList.remove("disabled");
+         for(i = 0; i < matchedCard.length; i++) { 
+             matchedCard[i].classList.add("disabled"); 
+         } 
+    }); 
 }
 
 // weDoNotHaveAMatch() Function
 function weDoNotHaveAMatch() { 
     //if(openedCards.length >= 1) {
-    setTimeout(function() { // In the number of ms declared on line 136, 
+    setTimeout(function() {
+        disableCards(); // In the number of ms declared on line 136, 
         //for(i=0; i < openedCards.length; i++) { 
             //if(openedCards[i] = "li.card") {
             //openedCards[i] = document.querySelector(openedCards[i].toString()); 
@@ -175,7 +195,7 @@ openedCards.push(this); // Add the current card to the list of opened card
 
 // startTimer() Function 
 function startTimer() { 
-    gameTime = window.setInterval(function() { 
+    gameTime = setInterval(function() { 
             seconds++; 
             if(seconds < 10) { 
                 sec.innerHTML = `0${seconds}`; 
@@ -192,7 +212,7 @@ function startTimer() {
             if(minutes > 9) { 
                 min.innerHTML =  `${minutes}`; 
             } // The function above displays the time in an easy-to-read format
-    }, 1000);
+    }, 100);
 }
 
 // clickToStart() Function

@@ -93,7 +93,9 @@ footer {
     background: #02ccba;
     font-size: 33px;
 }
-
+.deck .card.disabled{ 
+    pointer-events: none; 
+}
 .modal_background { 
     position: absolute; 
     top: 0; 
