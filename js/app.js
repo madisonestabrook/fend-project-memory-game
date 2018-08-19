@@ -1,5 +1,4 @@
-// Coding by Madison Estabrook in vanilla JavaScript ES6
-// ToDo: fix card matching issue 
+// Coding by Madison Estabrook in vanilla JavaScript ES6 
 // Global Variables
 let card = document.getElementsByClassName('card');
 let cards = [... card];
@@ -60,7 +59,7 @@ function startGame() {
 
 // stopModal() Function
 function stopModal() { 
-    clearTimeout(results); 
+    clearInterval(results); 
     modal.classList.add("hide"); 
 }
 
@@ -105,7 +104,7 @@ Object.defineProperty(HTMLElement.prototype, "classListChain", {
   // Function mostly from the MDN (see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some#Checking_whether_a_value_exists_in_an_array for more info)
  function checkerFunction(arr, val) { 
      return arr.some(function(arrVal) {
-         return val === arrVal; 
+         return val == arrVal; 
      });  
  }
 
@@ -126,7 +125,7 @@ function disableCards() {
         card.classList.add("disable"); 
     });
 }
-
+// ableCards() Function inspired by @drunkenismet 
 function enableCards() { 
     Array.prototype.filter.call(card, function() 
     {
@@ -140,7 +139,7 @@ function enableCards() {
 // weDoNotHaveAMatch() Function
 function weDoNotHaveAMatch() { 
     //if(openedCards.length >= 1) {
-    setTimeout(function() {
+    setInterval(function() {
         disableCards(); // In the number of ms declared on line 136, 
         //for(i=0; i < openedCards.length; i++) { 
             //if(openedCards[i] = "li.card") {
@@ -241,19 +240,21 @@ function removeAllStars() {
 
 // gameOver() Function 
 function gameOver() {
-    if(matchedCard.length === 16 || moves >= 18) {  // If there are 16 matches or 10 moves, 
-        clearTimeout(gameTime); // Clear the internal of gameTime
+    if(matchedCard.length === 16 || moves >= 8) {  // If there are 16 matches or 10 moves, 
+        clearInterval(gameTime); // Clear the interval of gameTime
         let finalTime = `${min.innerHTML}:${sec.innerHTML}`; // Grabs the final time
         results = setInterval(function() {
             modal.style.display = 'block';
-        }, 3000); 
+        }, 300); 
 
     let starScore = document.querySelector('.fa-star').innerHTML; 
     let totalMoves = document.querySelector('.modal_moves').innerHTML = 'Moves: ' + moves ; 
     document.querySelector(".modal_stars").innerHTML = starScore; 
     document.querySelector('.modal_time').innerHTML = finalTime;
     playAgainButton.addEventListener("click", reset);
-    moves = 0; 
+    moves = 0;
+    seconds = 0; 
+    minutes = 0;  
     }
 }
 
