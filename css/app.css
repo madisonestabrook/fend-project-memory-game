@@ -148,8 +148,7 @@ footer {
     display: none; 
 }
 .hide, .card.hide{ 
-    /* display: none; */ 
-     color: azure; 
+    display: none; 
 }
 .score-panel {
     text-align: left;

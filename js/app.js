@@ -55,7 +55,7 @@ function startGame() {
     min.innerHTML = '00'; 
     sec.innerHTML = '00';
     cardClicks(); 
-    clearInterval(gameTime); 
+    window.clearInterval(gameTime); 
 }
 
 // stopModal() Function
@@ -67,7 +67,7 @@ function stopModal() {
 // cardClicks() function 
 function cardClicks(){ 
     cards.forEach(function(card) { // For all the cards, 
-        card.addEventListener('click', flipCard); 
+        card.addEventListener('click', flipCard);  
         card.addEventListener('click', matchedEval); 
         card.addEventListener('click', gameOver); 
         card.addEventListener('click', clickToStart, { 
@@ -78,8 +78,8 @@ function cardClicks(){
 
 // flipCard() Function 
 function flipCard(){ 
-    event.target.classList.toggle('open'); 
-    event.target.classList.toggle('show'); 
+    this.classList.toggle('open'); 
+    this.classList.toggle('show'); 
 } // For each of the card classes above, toggle (see https://developer.mozilla.org/en-US/docs/Web/API/Element/classList for more info)
 
 // Thank you @drunkenismet for this OOP snippet and again for helping me
@@ -110,7 +110,7 @@ Object.defineProperty(HTMLElement.prototype, "classListChain", {
 //weGotAMatch() Function  
 function weGotAMatch() { 
     console.log("Your cards match!"); // Prints the message in quotes to the console 
-    for(i = 0; i < openedCards.length; i++) { 
+    for(i = 0; i < openedCards.length -1; i++) { 
         openedCards[i].classListChain.add("match").classListChain.remove("show", "open"); 
     }
     openedCards = []; // Resets the openedCards variable
@@ -121,19 +121,17 @@ function weDoNotHaveAMatch() {
     //if(openedCards.length >= 1) {
     setTimeout(function() { // In the number of ms declared on line 136, 
         for(i=0; i < openedCards.length; i++) { 
+            if(openedCards[i] = "li.card") {
+            //openedCards[i] = document.querySelector(openedCards[i].toString()); 
             openedCards[i].classList.remove("show","open", "matched"); 
-            openedCards[i].classList.add("hide"); 
+            //openedCards[i].classList.add("hide"); 
             openedCards[i].children.className = "hide";
-            openedCards[i].removeEventListener("click", function() { 
-                            matchedEval; 
-                            flipCard; 
-                            moveCounter;
-                            weGotAMatch; 
-            }); 
+            openedCards[i].removeEventListener("click", matchedEval()); 
             //openedCards[i].removeEventListener("click", matchedEval()); 
             //openedCards[i].children.classList.add("hide");
             
         }
+    }
             openedCards = []; 
     }, 678); 
 }
@@ -158,7 +156,7 @@ function matchedEval() {
     //if(openedCards.length === 1) { // If there are 2 opened cards,
         moveCounter();  // Call the moveCounter() function
         //let test = Object.is(openedCards[1], openedCards[0]); // Declares a variable, test, that tests if openedCards[1] equals openedCards[0]
-        let test = checkerFunction(openedCards,(event.target)); 
+        let test = checkerFunction(openedCards,(this)); 
         if(test || test === true || test == true){ 
             weDoNotHaveAMatch(); 
            
@@ -172,7 +170,7 @@ function matchedEval() {
 
 // startTimer() Function 
 function startTimer() { 
-    gameTime = setInterval(function() { 
+    gameTime = window.setInterval(function() { 
             seconds++; 
             if(seconds < 10) { 
                 sec.innerHTML = `0${seconds}`; 
@@ -189,7 +187,7 @@ function startTimer() {
             if(minutes > 9) { 
                 min.innerHTML =  `${minutes}`; 
             } // The function above displays the time in an easy-to-read format
-    }, 10000);
+    }, 1000);
 }
 
 // clickToStart() Function
