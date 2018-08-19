@@ -33,6 +33,17 @@ h1 {
     font-weight: 300;
 }
 
+footer { 
+    align-items: center; 
+    text-align: center;
+    justify-content: center;
+}
+
+.score-panel { 
+    list-style: none; 
+    display: inline-block; 
+    text-align: center; 
+}
 /*
  * Styles for the deck of cards
  */
@@ -149,10 +160,13 @@ h1 {
 
 .score-panel .stars li {
     list-style: none;
-    display: inline-block;
 }
 
 .score-panel .restart {
     float: right;
     cursor: pointer;
+}
+
+.fa-star, .fa-star-half { 
+    font-size: 14px; /* Makes stars easier to see and understand */ 
 }
