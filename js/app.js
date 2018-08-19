@@ -57,12 +57,12 @@ function startGame() {
     sec.innerHTML = '00';
     mil.innerHTML = '00'; 
     cardClicks(); 
-    clearInterval(gameTime); 
+    window.clearTimeout(gameTime); 
 }
 
 // stopModal() Function
 function stopModal() { 
-    clearInterval(results); 
+    window.clearTimeout(results); 
     modal.classList.add("hide"); 
 }
 
@@ -187,7 +187,7 @@ openedCards.push(this); // Add the current card to the list of opened card
 
 // startTimer() Function 
 function startTimer() { 
-    gameTime = setInterval(function() { 
+    gameTime = setTimeout(function() { 
             milliseconds++; 
             if(milliseconds < 10) {
                 mil.innerHTML = `0${milliseconds}`; 
@@ -219,6 +219,10 @@ function startTimer() {
     }, 100);
 }
 
+function stopTimer() { 
+    window.clearTimeout(gameTime); 
+}
+
 // clickToStart() Function
 function clickToStart() { 
     oneCount++;  
@@ -246,7 +250,7 @@ function removeAllStars() {
 // gameOver() Function 
 function gameOver() {
     if(matchedCard.length === 16 || moves >= 16) {  // If there are 16 matches or 10 moves, 
-        clearInterval(gameTime); // Clear the interval of gameTime
+        stopTimer(); 
         let finalTime = `${min.innerHTML}:${sec.innerHTML}:${mil.innerHTML}`; // Grabs the final time
         results = setInterval(function() {
             modal.style.display = 'block';
@@ -269,6 +273,7 @@ function gameOver() {
 function reset(){ 
     modal.style.display = "none"; 
     startGame();
+    stopTimer()
     enableCards(); 
 }
 
