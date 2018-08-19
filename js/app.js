@@ -10,8 +10,9 @@ let star = document.getElementsByClassName("fa-star");
 let stars = [... star]; 
 let i, gameTime, results, matchedCard; 
 const modal = document.getElementById("myDiv"); 
-const min = document.querySelector('.min'); 
-const sec = document.querySelector('.sec'); 
+const min = document.querySelector('.minutes'); 
+const sec = document.querySelector('.seconds');
+const mil = document.querySelector(".milliseconds"); 
 const playAgainButton = document.querySelector(".modal_replay"); 
 
 // Shuffle Function (NOT MINE)
@@ -50,9 +51,11 @@ function startGame() {
         star.classList.add('fas', 'fa-star'); 
     }); // For each card, reset the className and add the class names "fas" as well as "fa-star"
     seconds = 0; 
-    minutes = 0; 
+    minutes = 0;
+    milliseconds = 0; 
     min.innerHTML = '00'; 
     sec.innerHTML = '00';
+    mil.innerHTML = '00'; 
     cardClicks(); 
     clearInterval(gameTime); 
 }
@@ -195,7 +198,19 @@ openedCards.push(this); // Add the current card to the list of opened card
 // startTimer() Function 
 function startTimer() { 
     gameTime = setInterval(function() { 
-            seconds++; 
+            milliseconds++; 
+            if(milliseconds < 10) {
+                mil.innerHTML = `0${milliseconds}`; 
+            }
+            if(milliseconds > 9) { 
+                mil.innerHTML = `${milliseconds}`; 
+            if(milliseconds === 60) { 
+                seconds++; 
+                milliseconds = 0;
+                mil.innerHTML = `0${milliseconds}`;  
+                sec.innerHTML = `0${seconds}`;
+            }
+            }
             if(seconds < 10) { 
                 sec.innerHTML = `0${seconds}`; 
             }
@@ -242,7 +257,7 @@ function removeAllStars() {
 function gameOver() {
     if(matchedCard.length === 16 || moves >= 8) {  // If there are 16 matches or 10 moves, 
         clearInterval(gameTime); // Clear the interval of gameTime
-        let finalTime = `${min.innerHTML}:${sec.innerHTML}`; // Grabs the final time
+        let finalTime = `${min.innerHTML}:${sec.innerHTML}:${mil.innerHTML}`; // Grabs the final time
         results = setInterval(function() {
             modal.style.display = 'block';
         }, 300); 
@@ -264,6 +279,7 @@ function gameOver() {
 function reset(){ 
     modal.style.display = "none"; 
     startGame();
+    enableCards(); 
 }
 
 
