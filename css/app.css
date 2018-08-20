@@ -97,7 +97,7 @@ footer {
     pointer-events: none; 
 }
 .deck .card.disabled i{
-    display: none; 
+    /*display: none; */
 }
 .modal_background { 
     position: absolute; 

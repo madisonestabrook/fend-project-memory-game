@@ -107,7 +107,7 @@ Object.defineProperty(HTMLElement.prototype, "classListChain", {
   // Function mostly from the MDN (see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some#Checking_whether_a_value_exists_in_an_array for more info)
  function checkerFunction(arr, val) { 
      return arr.some(function(arrVal) {
-         return val == arrVal; 
+         return val === arrVal; 
      });  
  }
 
@@ -143,11 +143,11 @@ function enableCards() {
 // weDoNotHaveAMatch() Function
 function weDoNotHaveAMatch() { 
     //if(openedCards.length >= 1) {
-    setInterval(function() {
+    window.setTimeout(function() {
         disableCards(); // In the number of ms declared on line 136, 
     //openedCards.removeEventListener("click", matchedEval);             
     openedCards = []; 
-    }, 678); 
+    }, 1000); 
 }
 //}
 // moveCounter() Function
@@ -289,3 +289,4 @@ function reset(){
      *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
      *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
      */
+ 
