@@ -107,7 +107,7 @@ Object.defineProperty(HTMLElement.prototype, "classListChain", {
   // Function mostly from the MDN (see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some#Checking_whether_a_value_exists_in_an_array for more info)
  function checkerFunction(arr, val) { 
      return arr.some(function(arrVal) {
-         return val === arrVal; 
+         return val.children.classList === arrVal.children.classList; 
      });  
  }
 
